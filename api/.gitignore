@@ -1,0 +1,5 @@
+node_modules
+dist
+tif
+tif.pub
+.env

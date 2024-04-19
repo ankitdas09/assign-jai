@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
 import { Loader2 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CTable from "./components/Table";
@@ -35,7 +35,7 @@ function App() {
             formData.append("file", file);
             formData.append("doctorName", data.doctorName);
             formData.append("patientName", data.patientName);
-            // formData.append("patientAge", data.patientAge.toString());
+            formData.append("patientAge", data.patientAge.toString());
             formData.append("dateOfRecording", data.dateOfRecording.toUTCString());
 
             try {
@@ -46,6 +46,7 @@ function App() {
                 });
                 console.log("File uploaded successfully:", response.data);
                 toast.success("Uploaded successfully!")
+                setAllRecords(prev => [...prev, response.data])
                 reset();
             } catch (error) {
                 toast.error("Something went wrong!")
@@ -53,6 +54,30 @@ function App() {
             }
         }
     }
+
+    const [allRecords, setAllRecords] = useState<
+        {
+            _id: string;
+            doctorName: string;
+            patientName: string;
+            dateOfRecording: string;
+            patientAge: string;
+            audioId: string;
+        }[]
+    >([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await axios.get("http://localhost:8000/v1/audio");
+                setAllRecords(data.data);
+            } catch (error) {
+                toast.error("Something went wrong while fetching records!")
+                setAllRecords([]);
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
         <section>
@@ -129,7 +154,7 @@ function App() {
                         {isSubmitting ? "Uploading" : "Upload"}
                     </Button>
                 </form>
-                <CTable />
+                <CTable data={allRecords}/>
             </div>
         </section>
     );

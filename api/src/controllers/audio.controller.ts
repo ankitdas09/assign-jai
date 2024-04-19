@@ -45,7 +45,7 @@ export async function CreateRecord(
 
     await newAudio.save();
 
-    res.json(newAudio);
+    res.json(newRecord);
 }
 
 export async function StreamAudio(

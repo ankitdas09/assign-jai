@@ -8,21 +8,32 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CPlayModal from "../PlayModal";
 import { toast } from "react-toastify";
 
-const CTable = () => {
-    const [data, setData] = useState<
-        {
-            _id: string;
-            doctorName: string;
-            patientName: string;
-            dateOfRecording: string;
-            patientAge: string;
-            audioId: string;
-        }[]
-    >([]);
+interface Props {
+    data: {
+        _id: string;
+        doctorName: string;
+        patientName: string;
+        dateOfRecording: string;
+        patientAge: string;
+        audioId: string;
+    }[]
+}
+
+const CTable = (props : Props) => {
+    // const [data, setData] = useState<
+    //     {
+    //         _id: string;
+    //         doctorName: string;
+    //         patientName: string;
+    //         dateOfRecording: string;
+    //         patientAge: string;
+    //         audioId: string;
+    //     }[]
+    // >([]);
 
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
@@ -42,18 +53,18 @@ const CTable = () => {
         }
     };
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await axios.get("http://localhost:8000/v1/audio");
-                setData(data.data);
-            } catch (error) {
-                toast.error("Something went wrong while fetching records!")
-                setData([]);
-            }
-        }
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const data = await axios.get("http://localhost:8000/v1/audio");
+    //             setData(data.data);
+    //         } catch (error) {
+    //             toast.error("Something went wrong while fetching records!")
+    //             setData([]);
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
 
     return (
         <>
@@ -70,7 +81,7 @@ const CTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.map((item) => {
+                    {props.data.map((item) => {
                         return (
                             <TableRow key={item._id}>
                                 <TableCell className="font-medium">

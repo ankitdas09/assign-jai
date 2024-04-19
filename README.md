@@ -25,6 +25,11 @@ npm run dev
 
 ```/api/.env``` requires MONGO_URI. Recommended to use Atlas (as it has been used in development and testing).
 
+
+### Notes
+
+Currently the backend can handle audio files upto 16MB. Above 16MB bugs may arise. (Sorry, was busy with academics didn't get enough time to implement MongoDB file storage featues.)
+
 ### Stack Used
 
 * Typescript
@@ -33,7 +38,3 @@ npm run dev
 * React
 * TailwindCSS
 * ShadCn for UI components
-
-### Notes
-
-Currently the backend can handle audio files upto 16MB. Above 16MB bugs may arise. (Sorry, was busy with academics didn't get enough time to implement MongoDB file storage featues.)

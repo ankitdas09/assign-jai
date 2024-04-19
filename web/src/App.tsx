@@ -64,7 +64,7 @@ function App() {
             </nav>
             <div className="container mx-auto p-2">
                 <h2 className="text-lg font-semibold mt-1">Upload new recording</h2>
-                {/* <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <form action="" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid w-full max-w-md items-center gap-1.5 mt-2">
                         <Label htmlFor="picture">Doctor's Name</Label>
                         <Input
@@ -128,7 +128,7 @@ function App() {
                         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         {isSubmitting ? "Uploading" : "Upload"}
                     </Button>
-                </form> */}
+                </form>
                 <CTable />
             </div>
         </section>

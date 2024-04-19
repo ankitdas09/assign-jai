@@ -8,11 +8,15 @@
 
 Backend
 ```
+cd api
+npm install
 npm run build
 npm start
 ```
 
 Frontend
 ```
+cd web
+npm install
 npm run dev
 ```
